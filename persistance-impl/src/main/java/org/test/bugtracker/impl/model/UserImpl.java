@@ -6,10 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.test.bugtracker.model.BTUser;
+import org.test.bugtracker.model.User;
 
 @Entity
-public class BTUserImpl implements BTUser {
+public class UserImpl implements User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -58,7 +58,7 @@ public class BTUserImpl implements BTUser {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        BTUserImpl other = (BTUserImpl) obj;
+        UserImpl other = (UserImpl) obj;
         if (id != other.id) {
             return false;
         }

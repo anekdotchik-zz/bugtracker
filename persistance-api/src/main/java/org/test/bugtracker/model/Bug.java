@@ -3,9 +3,9 @@ package org.test.bugtracker.model;
 import java.util.List;
 
 public interface Bug extends SimpleIdentifiedEntity {
-    BTUser getAuthor();
+    User getAuthor();
 
-    void setAuthor(BTUser author);
+    void setAuthor(User author);
 
     String getTitle();
 

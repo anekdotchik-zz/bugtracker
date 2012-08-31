@@ -5,9 +5,9 @@ public interface Comment extends SimpleIdentifiedEntity {
 
     void setBug(Bug bug);
 
-    BTUser getAuthor();
+    User getAuthor();
 
-    void setAuthor(BTUser author);
+    void setAuthor(User author);
 
     String getMessage();
 

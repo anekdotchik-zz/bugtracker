@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.test.bugtracker.model.BTUser;
+import org.test.bugtracker.model.User;
 import org.test.bugtracker.model.Bug;
 import org.test.bugtracker.model.Comment;
 
@@ -19,10 +19,10 @@ public class CommentImpl implements Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = BTUserImpl.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = UserImpl.class)
     private Bug bug;
-    @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = BTUserImpl.class)
-    private BTUser author;
+    @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = UserImpl.class)
+    private User author;
     @Column(nullable = false)
     private String message;
 
@@ -42,11 +42,11 @@ public class CommentImpl implements Comment {
         this.bug = bug;
     }
 
-    public BTUser getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(BTUser author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 

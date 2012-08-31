@@ -1,6 +1,6 @@
 package org.test.bugtracker.model;
 
-public interface BTUser extends SimpleIdentifiedEntity {
+public interface User extends SimpleIdentifiedEntity {
     String getLogin();
 
     void setLogin(String login);
