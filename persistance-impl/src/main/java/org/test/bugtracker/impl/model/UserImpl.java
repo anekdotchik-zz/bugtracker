@@ -15,9 +15,9 @@ public class UserImpl implements User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column
+    @Column(nullable=false)
     private String login;
-    @Column
+    @Column(nullable=false)
     private String pass;
 
     public Long getId() {
