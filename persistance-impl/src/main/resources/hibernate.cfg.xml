@@ -14,7 +14,7 @@
         <property name="show_sql">true</property>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
-        <mapping class="org.test.bugtracker.impl.model.BTUserImpl"/>
+        <mapping class="org.test.bugtracker.impl.model.UserImpl"/>
         <mapping class="org.test.bugtracker.impl.model.BugImpl"/>
         <mapping class="org.test.bugtracker.impl.model.CommentImpl"/>
     </session-factory>
