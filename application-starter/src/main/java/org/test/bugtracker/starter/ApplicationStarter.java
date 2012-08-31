@@ -1,9 +1,10 @@
 package org.test.bugtracker.starter;
 
-import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.test.bugtracker.bo.UserBO;
+import org.test.bugtracker.impl.model.UserImpl;
+import org.test.bugtracker.model.User;
 
 public class ApplicationStarter {
     private ApplicationContext context;
@@ -13,9 +14,11 @@ public class ApplicationStarter {
     }
 
     public void start() {
-        context.getBeanDefinitionNames();
-        context.getBean(SessionFactory.class).openSession();
-        context.getBean(UserBO.class).findById(0L);
+        UserBO userBO = context.getBean(UserBO.class);
+        User user = new UserImpl();
+        user.setLogin("login");
+        user.setPass("pass");
+        userBO.save(user);
     }
 
     public static void main(String[] args) {
