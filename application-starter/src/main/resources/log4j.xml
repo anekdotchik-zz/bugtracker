@@ -19,4 +19,9 @@
         <appender-ref ref="console" />
         <appender-ref fer="log" />
     </root>
+    <logger name="org.springframework">
+        <level value="info" />
+        <appender-ref ref="console" />
+        <appender-ref fer="log" />
+    </logger>
 </log4j:configuration>

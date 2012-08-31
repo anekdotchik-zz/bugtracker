@@ -1,6 +1,7 @@
 .classpath
 .project
 .settings
+.springBeans
 persistance-api/target
 persistance-impl/target
 application-starter/target

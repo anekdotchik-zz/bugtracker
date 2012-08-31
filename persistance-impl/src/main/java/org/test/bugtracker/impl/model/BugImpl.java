@@ -10,12 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.test.bugtracker.model.User;
 import org.test.bugtracker.model.Bug;
 import org.test.bugtracker.model.Comment;
+import org.test.bugtracker.model.User;
 
 @Entity
 @Table(name="BT_BUGS")
@@ -23,7 +22,7 @@ public class BugImpl implements Bug {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = UserImpl.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = UserImpl.class)
     private User author;
     @Column(nullable = false)
     private String title;

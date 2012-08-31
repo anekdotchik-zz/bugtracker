@@ -5,13 +5,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ApplicationStarter {
     private ApplicationContext context;
-    public static void main(String[] args) {
-        new ApplicationStarter().start();
+
+    public ApplicationStarter(ApplicationContext context) {
+        this.context = context;
     }
-    
+
     public void start() {
-        context = new ClassPathXmlApplicationContext("spring/context.xml");
         context.toString();
     }
 
+    public static void main(String[] args) {
+        new ApplicationStarter(new ClassPathXmlApplicationContext(
+                "spring/context.xml")).start();
+    }
 }
