@@ -1,18 +1,15 @@
 package org.test.bugtracker.impl.bo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.test.bugtracker.bo.UserBO;
 import org.test.bugtracker.dao.UserDAO;
 import org.test.bugtracker.model.User;
 
 public class UserBOImpl implements UserBO {
     private static final long serialVersionUID = -5525144797577781512L;
-
+    @Autowired
     private UserDAO userDAO;
     
-    public void setUserDAO(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
-
     public void save(User entity) {
         userDAO.save(entity);
     }
