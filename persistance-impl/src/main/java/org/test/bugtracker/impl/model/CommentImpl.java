@@ -1,0 +1,84 @@
+package org.test.bugtracker.impl.model;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.test.bugtracker.model.BTUser;
+import org.test.bugtracker.model.Bug;
+import org.test.bugtracker.model.Comment;
+
+@Entity
+public class CommentImpl implements Comment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = BTUserImpl.class)
+    private Bug bug;
+    @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = BTUserImpl.class)
+    private BTUser author;
+    @Column(nullable = false)
+    private String message;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Bug getBug() {
+        return bug;
+    }
+
+    public void setBug(Bug bug) {
+        this.bug = bug;
+    }
+
+    public BTUser getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(BTUser author) {
+        this.author = author;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        CommentImpl other = (CommentImpl) obj;
+        if (id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
+}
