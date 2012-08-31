@@ -1,29 +1,33 @@
 package org.test.bugtracker.impl.dao;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.test.bugtracker.dao.CommentDAO;
+import org.test.bugtracker.impl.model.CommentImpl;
 import org.test.bugtracker.model.Comment;
 
+@Repository
 public class CommentDAOImpl implements CommentDAO {
     private static final long serialVersionUID = -6220870787332598552L;
 
+    @Autowired
+    private SessionFactory sessionFactory;
+    
     public void save(Comment entity) {
-        // TODO Auto-generated method stub
-
+        sessionFactory.getCurrentSession().save(entity);
     }
 
     public Comment findById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        return (Comment) sessionFactory.getCurrentSession().load(CommentImpl.class, id);
     }
 
     public void update(Comment entity) {
-        // TODO Auto-generated method stub
-
+        sessionFactory.getCurrentSession().merge(entity);
     }
 
     public void delete(Comment entity) {
-        // TODO Auto-generated method stub
-
+        sessionFactory.getCurrentSession().delete(entity);
     }
 
 }
