@@ -21,7 +21,8 @@
     </root>
     <logger name="org.springframework">
         <level value="info" />
-        <appender-ref ref="console" />
-        <appender-ref fer="log" />
+    </logger>
+    <logger name="org.hibernate">
+        <level value="info" />
     </logger>
 </log4j:configuration>
