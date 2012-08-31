@@ -9,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.test.bugtracker.model.User;
 import org.test.bugtracker.model.Bug;
 import org.test.bugtracker.model.Comment;
 
 @Entity
+@Table(name="BT_COMMENTS")
 public class CommentImpl implements Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
