@@ -16,6 +16,7 @@
     <modules>
         <module>persistance-api</module>
         <module>persistance-impl</module>
+        <module>application-starter</module>
     </modules>
 
     <build>
