@@ -5,3 +5,4 @@
 persistance-api/target
 persistance-impl/target
 application-starter/target
+application-starter/console.log
