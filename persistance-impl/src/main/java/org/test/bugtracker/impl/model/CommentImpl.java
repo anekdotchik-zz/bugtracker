@@ -20,7 +20,7 @@ public class CommentImpl implements Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = UserImpl.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = BugImpl.class)
     private Bug bug;
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = UserImpl.class)
     private User author;
