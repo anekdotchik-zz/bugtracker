@@ -14,6 +14,8 @@
         <property name="show_sql">true</property>
         <property name="dialect">${jdbc.dialect}</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="hibernate.connection.charSet">UTF-8</property>
+        <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
         <mapping class="org.test.bugtracker.impl.model.UserImpl" />
         <mapping class="org.test.bugtracker.impl.model.BugImpl" />
         <mapping class="org.test.bugtracker.impl.model.CommentImpl" />
