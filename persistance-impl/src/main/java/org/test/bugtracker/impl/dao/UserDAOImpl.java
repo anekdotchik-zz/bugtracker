@@ -31,8 +31,9 @@ public class UserDAOImpl implements UserDAO {
     }
 
     public User findByLogin(String login) {
-        // TODO Implement me
-        return null;
+        return (User) sessionFactory.getCurrentSession()
+                .createQuery("from User u where u.login=?")
+                .setString(0, login).uniqueResult();
     }
 
 }

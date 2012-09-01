@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 import org.test.bugtracker.model.User;
 
-@Entity
+@Entity(name="User")
 @Table(name="BT_USERS")
 public class UserImpl implements User {
     @Id

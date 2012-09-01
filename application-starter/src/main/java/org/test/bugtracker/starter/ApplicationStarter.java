@@ -19,6 +19,8 @@ public class ApplicationStarter {
         user.setLogin("login");
         user.setPass("pass");
         userBO.save(user);
+        User user2 = userBO.findByLogin("login");
+        System.out.println(user2.getId());
     }
 
     public static void main(String[] args) {

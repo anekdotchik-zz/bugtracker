@@ -16,7 +16,7 @@ import org.test.bugtracker.model.Bug;
 import org.test.bugtracker.model.Comment;
 import org.test.bugtracker.model.User;
 
-@Entity
+@Entity(name="Bug")
 @Table(name="BT_BUGS")
 public class BugImpl implements Bug {
     @Id
