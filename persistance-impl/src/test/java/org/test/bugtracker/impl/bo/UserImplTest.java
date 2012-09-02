@@ -22,7 +22,7 @@ public class UserImplTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private UserBO userBO;
 
-    @Test(priority=0)
+    @Test(priority = 0)
     public void createNewUserTest() {
         User user = new UserImpl();
         user.setLogin(LOGIN);
@@ -30,24 +30,24 @@ public class UserImplTest extends AbstractTestNGSpringContextTests {
         userBO.save(user);
         assertTrue(user.getId() == ID);
     }
-    
-    @Test(dependsOnMethods="createNewUserTest")
+
+    @Test(priority = 1, dependsOnMethods = "createNewUserTest")
     public void findUserTestById() {
         User user = userBO.findById(1L);
         assertNotNull(user);
         assertEquals(LOGIN, user.getLogin());
         assertEquals(PASS, user.getPass());
     }
-    
-    @Test(dependsOnMethods="createNewUserTest")
+
+    @Test(priority = 1, dependsOnMethods = "createNewUserTest")
     public void findUserTestByLogin() {
         User user = userBO.findByLogin(LOGIN);
         assertNotNull(user);
         assertEquals(LOGIN, user.getLogin());
         assertEquals(PASS, user.getPass());
     }
-    
-    @Test(dependsOnMethods="createNewUserTest", expectedExceptions={ConstraintViolationException.class})
+
+    @Test(priority = 1, dependsOnMethods = "createNewUserTest", expectedExceptions = { ConstraintViolationException.class })
     public void createUserWithSomeIdTest() {
         User user = new UserImpl();
         user.setId(1L);
@@ -55,8 +55,8 @@ public class UserImplTest extends AbstractTestNGSpringContextTests {
         user.setPass(PASS);
         userBO.save(user);
     }
-    
-    @Test(dependsOnMethods="createNewUserTest", expectedExceptions={ConstraintViolationException.class})
+
+    @Test(priority = 1, dependsOnMethods = "createNewUserTest", expectedExceptions = { ConstraintViolationException.class })
     public void createUserWithSomeLoginTest() {
         User user = new UserImpl();
         user.setLogin(LOGIN);
@@ -64,16 +64,23 @@ public class UserImplTest extends AbstractTestNGSpringContextTests {
         userBO.save(user);
     }
 
-    @Test(dependsOnMethods="createNewUserTest")
+    @Test(priority = 1, dependsOnMethods = "createNewUserTest")
     public void updateUserLoginTest() {
         User user = userBO.findById(1L);
-        user.setLogin(LOGIN+"2");
-        user.setPass(PASS+"2");
+        user.setLogin(LOGIN + "2");
+        user.setPass(PASS + "2");
         userBO.update(user);
         User user2 = userBO.findById(1L);
         assertNotNull(user2);
-        assertEquals(LOGIN+"2", user2.getLogin());
-        assertEquals(PASS+"2", user2.getPass());
+        assertEquals(LOGIN + "2", user2.getLogin());
+        assertEquals(PASS + "2", user2.getPass());
     }
 
+    @Test(priority = 2, dependsOnMethods = "createNewUserTest")
+    public void deleteUserTest() {
+        User user = userBO.findById(1L);
+        userBO.delete(user);
+        User user2 = userBO.findById(1L);
+        assertNull(user2);
+    }
 }
