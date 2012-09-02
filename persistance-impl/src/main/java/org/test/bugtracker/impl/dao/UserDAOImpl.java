@@ -18,8 +18,9 @@ public class UserDAOImpl implements UserDAO {
     }
 
     public User findById(Long id) {
-        return (User) sessionFactory.getCurrentSession().load(
-                UserDAOImpl.class, id);
+        return (User) sessionFactory.getCurrentSession()
+                .createQuery("from User u where u.id=?")
+                .setLong(0, id).uniqueResult();
     }
 
     public void update(User entity) {

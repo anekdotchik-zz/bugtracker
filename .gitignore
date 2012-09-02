@@ -4,5 +4,6 @@
 .springBeans
 persistance-api/target
 persistance-impl/target
+persistance-impl/test-output
 application-starter/target
 application-starter/console.log

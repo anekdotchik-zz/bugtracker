@@ -4,7 +4,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.test.bugtracker.dao.CommentDAO;
-import org.test.bugtracker.impl.model.CommentImpl;
 import org.test.bugtracker.model.Comment;
 
 @Repository
@@ -19,7 +18,9 @@ public class CommentDAOImpl implements CommentDAO {
     }
 
     public Comment findById(Long id) {
-        return (Comment) sessionFactory.getCurrentSession().load(CommentImpl.class, id);
+        return (Comment) sessionFactory.getCurrentSession()
+                .createQuery("from Comment c where c.id=?")
+                .setLong(0, id).uniqueResult();
     }
 
     public void update(Comment entity) {

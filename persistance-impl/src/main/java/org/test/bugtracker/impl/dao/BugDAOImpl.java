@@ -4,7 +4,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.test.bugtracker.dao.BugDAO;
-import org.test.bugtracker.impl.model.BugImpl;
 import org.test.bugtracker.model.Bug;
 
 @Repository
@@ -19,7 +18,9 @@ public class BugDAOImpl implements BugDAO {
     }
 
     public Bug findById(Long id) {
-        return (Bug) sessionFactory.getCurrentSession().load(BugImpl.class, id);
+        return (Bug) sessionFactory.getCurrentSession()
+                .createQuery("from Bug b where b.id=?")
+                .setLong(0, id).uniqueResult();
     }
 
     public void update(Bug entity) {
