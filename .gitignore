@@ -2,6 +2,7 @@
 .project
 .settings
 .springBeans
+target
 persistance-api/target
 persistance-impl/target
 persistance-impl/test-output
