@@ -64,8 +64,8 @@ public class UserImplTest extends AbstractTestNGSpringContextTests {
         userBO.save(user);
     }
 
-    @Test(priority = 1, dependsOnMethods = "createNewUserTest")
-    public void updateUserLoginTest() {
+    @Test(priority = 2, dependsOnMethods = "createNewUserTest")
+    public void updateUserLoginAndPassTest() {
         User user = userBO.findById(1L);
         user.setLogin(LOGIN + "2");
         user.setPass(PASS + "2");
@@ -74,9 +74,10 @@ public class UserImplTest extends AbstractTestNGSpringContextTests {
         assertNotNull(user2);
         assertEquals(LOGIN + "2", user2.getLogin());
         assertEquals(PASS + "2", user2.getPass());
+        assertTrue(ID == user2.getId());
     }
 
-    @Test(priority = 2, dependsOnMethods = "createNewUserTest")
+    @Test(priority = 3, dependsOnMethods = "createNewUserTest")
     public void deleteUserTest() {
         User user = userBO.findById(1L);
         userBO.delete(user);
