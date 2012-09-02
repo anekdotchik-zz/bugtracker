@@ -16,7 +16,6 @@ import org.testng.annotations.Test;
 @ContextConfiguration(locations = { "classpath:spring/context.xml" })
 public class UserImplTest extends AbstractTestNGSpringContextTests {
     private static final String PASS = "pass";
-    private static final long ID = 1L;
     private static final String LOGIN = "login";
     @Autowired
     private ApplicationContext context;
@@ -29,20 +28,17 @@ public class UserImplTest extends AbstractTestNGSpringContextTests {
         user.setLogin(LOGIN);
         user.setPass(PASS);
         userBO.save(user);
-        assertTrue(user.getId() == ID);
-    }
-
-    @Test(priority = 1, dependsOnMethods = "createNewUser")
-    public void findUserById() {
-        User user = userBO.findById(1L);
-        assertNotNull(user);
-        assertEquals(LOGIN, user.getLogin());
-        assertEquals(PASS, user.getPass());
+        assertTrue(user.getId() > 0);
     }
 
     @Test(priority = 1, dependsOnMethods = "createNewUser")
     public void findUserByLogin() {
         User user = userBO.findByLogin(LOGIN);
+        assertNotNull(user);
+        assertEquals(LOGIN, user.getLogin());
+        assertEquals(PASS, user.getPass());
+
+        user = userBO.findById(user.getId());
         assertNotNull(user);
         assertEquals(LOGIN, user.getLogin());
         assertEquals(PASS, user.getPass());
@@ -85,22 +81,23 @@ public class UserImplTest extends AbstractTestNGSpringContextTests {
 
     @Test(priority = 2, dependsOnMethods = "createNewUser")
     public void updateUserLoginAndPass() {
-        User user = userBO.findById(1L);
+        long id = 1L;
+        User user = userBO.findById(id);
         user.setLogin(LOGIN + "2");
         user.setPass(PASS + "2");
         userBO.update(user);
-        User user2 = userBO.findById(1L);
+        User user2 = userBO.findById(id);
         assertNotNull(user2);
         assertEquals(LOGIN + "2", user2.getLogin());
         assertEquals(PASS + "2", user2.getPass());
-        assertTrue(ID == user2.getId());
+        assertTrue(id == user2.getId());
     }
 
     @Test(priority = 3, dependsOnMethods = "createNewUser")
     public void deleteUser() {
-        User user = userBO.findById(1L);
+        User user = userBO.findByLogin(LOGIN);
         userBO.delete(user);
-        User user2 = userBO.findById(1L);
+        User user2 = userBO.findByLogin(LOGIN);
         assertNull(user2);
     }
 }
