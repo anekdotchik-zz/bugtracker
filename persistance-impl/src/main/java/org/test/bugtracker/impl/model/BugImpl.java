@@ -25,7 +25,7 @@ public class BugImpl implements Bug {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @JoinColumn(nullable=false)
-    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, targetEntity = UserImpl.class)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE }, targetEntity = UserImpl.class)
     private User author;
     @Column(nullable = false)
     private String title;

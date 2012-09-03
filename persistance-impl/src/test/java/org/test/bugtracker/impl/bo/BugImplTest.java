@@ -66,10 +66,6 @@ public class BugImplTest extends AbstractTestNGSpringContextTests {
         bug.setTitle(TITLE);
         bug.setMessage(MESSAGE);        
         bugBO.save(bug);
-        assertNotNull(bug.getId());
-        Bug bug1 = bugBO.findById(bug.getId());
-        assertEquals(TITLE,bug1.getTitle());
-        assertEquals(MESSAGE,bug1.getMessage());
     }
 
     @Test(priority = 0)
@@ -136,5 +132,38 @@ public class BugImplTest extends AbstractTestNGSpringContextTests {
         assertNotNull(bug3);
         assertEquals(title2,bug3.getTitle());
         assertEquals(message2,bug3.getMessage());
+    }
+    
+    @Test(priority = 0, expectedExceptions={PropertyValueException.class})
+    public void createNewBugWithoutTitle() {
+        Bug bug = new BugImpl();
+        bug.setMessage(MESSAGE);        
+        bug.setAuthor(user);
+        bugBO.save(bug);
+        assertNotNull(bug.getId());
+    }
+    
+    @Test(priority = 0, expectedExceptions={PropertyValueException.class})
+    public void createNewBugWithoutMessage() {
+        Bug bug = new BugImpl();
+        bug.setTitle(TITLE);
+        bug.setAuthor(user);        
+        bugBO.save(bug);
+    }
+    
+    @Test()
+    public void deleteBug() {
+        Bug bug = new BugImpl();
+        bug.setTitle(TITLE);
+        bug.setMessage(MESSAGE);
+        bug.setAuthor(user);        
+        bugBO.save(bug);
+        Long id = bug.getId();
+        assertNotNull(id);
+        Bug bug1 = bugBO.findById(id);
+        assertEquals(TITLE,bug1.getTitle());
+        assertEquals(MESSAGE,bug1.getMessage());
+        bugBO.delete(bug1);
+        assertNull(bugBO.findById(id));
     }
 }

@@ -22,10 +22,10 @@ public class CommentImpl implements Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @JoinColumn(nullable=false)
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = BugImpl.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE }, targetEntity = BugImpl.class)
     private Bug bug;
     @JoinColumn(nullable=false)
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = UserImpl.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE }, targetEntity = UserImpl.class)
     private User author;
     @Column(nullable = false)
     private String message;
