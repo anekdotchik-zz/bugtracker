@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.test.bugtracker.model.Bug;
@@ -24,13 +25,13 @@ public class BugImpl implements Bug {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @JoinColumn(nullable=false)
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = UserImpl.class)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, targetEntity = UserImpl.class)
     private User author;
     @Column(nullable = false)
     private String title;
     @Column(nullable = false)
     private String message;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = CommentImpl.class)
+    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, targetEntity = CommentImpl.class)
     private List<Comment> comments;
 
     public Long getId() {
