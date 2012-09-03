@@ -6,5 +6,6 @@ target
 persistance-api/target
 persistance-impl/target
 persistance-impl/test-output
+persistance-impl/console.log
 application-starter/target
 application-starter/console.log

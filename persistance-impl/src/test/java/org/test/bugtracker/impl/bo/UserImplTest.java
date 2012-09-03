@@ -15,8 +15,8 @@ import org.testng.annotations.Test;
 
 @ContextConfiguration(locations = { "classpath:spring/context.xml" })
 public class UserImplTest extends AbstractTestNGSpringContextTests {
-    private static final String PASS = "pass";
     private static final String LOGIN = "login";
+    private static final String PASS = "pass";    
     @Autowired
     private ApplicationContext context;
     @Autowired
@@ -81,19 +81,32 @@ public class UserImplTest extends AbstractTestNGSpringContextTests {
 
     @Test(priority = 2, dependsOnMethods = "createNewUser")
     public void updateUserLoginAndPass() {
-        long id = 1L;
-        User user = userBO.findById(id);
-        user.setLogin(LOGIN + "2");
-        user.setPass(PASS + "2");
+        String newLogin = LOGIN + "2";
+        String newPass = PASS + "2";
+        User user = userBO.findByLogin(LOGIN);
+        long id = user.getId();
+        assertNotNull(user);
+        user.setLogin(newLogin);
+        user.setPass(newPass);
         userBO.update(user);
-        User user2 = userBO.findById(id);
+        User user2 = userBO.findByLogin(newLogin);
         assertNotNull(user2);
-        assertEquals(LOGIN + "2", user2.getLogin());
-        assertEquals(PASS + "2", user2.getPass());
+        assertEquals(newLogin, user2.getLogin());
+        assertEquals(newPass, user2.getPass());
         assertTrue(id == user2.getId());
+        User user3 = userBO.findByLogin(newLogin);
+        assertNotNull(user3);
+        user3.setLogin(LOGIN);
+        user3.setPass(PASS);
+        userBO.update(user3);
+        User user4 = userBO.findByLogin(LOGIN);
+        assertTrue(id == user4.getId());
+        assertEquals(LOGIN, user4.getLogin());
+        assertEquals(PASS, user4.getPass());
+        
     }
 
-    @Test(priority = 3, dependsOnMethods = "createNewUser")
+    @Test(priority = 3, dependsOnMethods = "updateUserLoginAndPass")
     public void deleteUser() {
         User user = userBO.findByLogin(LOGIN);
         userBO.delete(user);
