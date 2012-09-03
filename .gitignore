@@ -10,3 +10,4 @@ persistance-impl/console.log
 application-starter/target
 application-starter/console.log
 bugtracker-ejb/target
+bugtracker-ejb/test-output
