@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,8 +21,10 @@ public class CommentImpl implements Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @JoinColumn(nullable=false)
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = BugImpl.class)
     private Bug bug;
+    @JoinColumn(nullable=false)
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, targetEntity = UserImpl.class)
     private User author;
     @Column(nullable = false)
