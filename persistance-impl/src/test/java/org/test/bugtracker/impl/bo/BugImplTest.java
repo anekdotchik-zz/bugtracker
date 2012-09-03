@@ -100,8 +100,9 @@ public class BugImplTest extends AbstractTestNGSpringContextTests {
         comments.add(comment);
         bug.setComments(comments);
         bugBO.save(bug);
-        assertNotNull(bug.getId());        
-        Bug bug2 = bugBO.findById(bug.getId());
+        Long id = bug.getId();
+        assertNotNull(id);        
+        Bug bug2 = bugBO.findById(id);
         assertEquals(TITLE,bug2.getTitle());
         assertEquals(MESSAGE,bug2.getMessage());
         assertEquals(user, bug2.getAuthor());
