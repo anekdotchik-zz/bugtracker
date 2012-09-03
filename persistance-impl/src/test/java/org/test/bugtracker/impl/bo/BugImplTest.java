@@ -1,6 +1,6 @@
 package org.test.bugtracker.impl.bo;
 
-import static junit.framework.Assert.*;
+import static org.testng.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
