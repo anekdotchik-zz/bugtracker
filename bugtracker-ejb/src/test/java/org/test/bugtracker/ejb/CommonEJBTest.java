@@ -6,21 +6,18 @@ import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-
 public class CommonEJBTest {
     protected final String LOGIN = this.getClass().getSimpleName();
     protected static final String PASS = "pass";
     protected static final String MESSAGE = "message";
-    protected EJBContainer ejbContainer;
-    protected Context ctx;
-    protected BugEJB bugEJB;
-    protected UserEJB userEJB;
-    protected CommentEJB commentEJB;
+    protected static EJBContainer ejbContainer;
+    protected static Context ctx;
+    protected static BugEJB bugEJB;
+    protected static UserEJB userEJB;
+    protected static CommentEJB commentEJB;
+    private static boolean isInit = false;
 
-    @BeforeSuite
-    private void commonSetup() throws NamingException {
+    private static void commonSetup() throws NamingException {
         ejbContainer = EJBContainer.createEJBContainer();
         ctx = ejbContainer.getContext();
 
@@ -35,9 +32,16 @@ public class CommonEJBTest {
         assertNotNull(userEJB);
     }
 
-    @AfterSuite
-    private void commonCleanup() {
-        ejbContainer.close();
-    }
+//    @AfterSuite
+//    private void commonCleanup() {
+//        ejbContainer.close();
+//    }
 
+    
+    protected void init() throws NamingException {
+        if (!isInit) {
+            commonSetup();
+            isInit = true;
+        }
+    }
 }

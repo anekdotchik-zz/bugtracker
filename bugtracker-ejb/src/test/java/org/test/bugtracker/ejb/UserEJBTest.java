@@ -3,12 +3,19 @@ package org.test.bugtracker.ejb;
 import static org.testng.Assert.*;
 
 import javax.ejb.EJBException;
+import javax.naming.NamingException;
 
 import org.test.bugtracker.impl.model.UserImpl;
 import org.test.bugtracker.model.User;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class UserEJBTest extends CommonEJBTest {
+    @BeforeClass
+    protected void init() throws NamingException {
+       super.init(); 
+    }
+    
     @Test(priority = 0)
     public void createNewUser() {
         User user = new UserImpl();

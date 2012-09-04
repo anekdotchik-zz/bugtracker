@@ -5,9 +5,9 @@ import static org.testng.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJBException;
 import javax.naming.NamingException;
 
-import org.hibernate.PropertyValueException;
 import org.test.bugtracker.impl.model.BugImpl;
 import org.test.bugtracker.impl.model.CommentImpl;
 import org.test.bugtracker.impl.model.UserImpl;
@@ -24,6 +24,8 @@ public class BugEJBTest extends CommonEJBTest {
 
     @BeforeClass
     private void setup() throws NamingException {
+        super.init(); 
+        
         user = new UserImpl();
         user.setLogin(LOGIN);
         user.setPass(PASS);
@@ -44,7 +46,7 @@ public class BugEJBTest extends CommonEJBTest {
         assertEquals(MESSAGE, bug2.getMessage());
     }
 
-    @Test(expectedExceptions = { PropertyValueException.class })
+    @Test(expectedExceptions = { EJBException.class })
     public void createNewBugWithoutAuthor() {
         Bug bug = new BugImpl();
         bug.setTitle(TITLE);
@@ -118,7 +120,7 @@ public class BugEJBTest extends CommonEJBTest {
         assertEquals(message2, bug3.getMessage());
     }
 
-    @Test(expectedExceptions = { PropertyValueException.class })
+    @Test(expectedExceptions = { EJBException.class })
     public void createNewBugWithoutTitle() {
         Bug bug = new BugImpl();
         bug.setMessage(MESSAGE);
@@ -127,7 +129,7 @@ public class BugEJBTest extends CommonEJBTest {
         assertNotNull(bug.getId());
     }
 
-    @Test(expectedExceptions = { PropertyValueException.class })
+    @Test(expectedExceptions = { EJBException.class })
     public void createNewBugWithoutMessage() {
         Bug bug = new BugImpl();
         bug.setTitle(TITLE);

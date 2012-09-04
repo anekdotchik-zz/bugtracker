@@ -2,9 +2,9 @@ package org.test.bugtracker.ejb;
 
 import static org.testng.Assert.*;
 
+import javax.ejb.EJBException;
 import javax.naming.NamingException;
 
-import org.hibernate.PropertyValueException;
 import org.test.bugtracker.impl.model.BugImpl;
 import org.test.bugtracker.impl.model.CommentImpl;
 import org.test.bugtracker.impl.model.UserImpl;
@@ -21,6 +21,8 @@ public class CommentEJBTest extends CommonEJBTest {
 
     @BeforeClass
     private void setup() throws NamingException {
+        super.init();
+
         user = new UserImpl();
         user.setLogin(LOGIN);
         user.setPass("pass");
@@ -53,7 +55,7 @@ public class CommentEJBTest extends CommonEJBTest {
         assertEquals(MESSAGE, comment2.getMessage());
     }
 
-    @Test(expectedExceptions = { PropertyValueException.class })
+    @Test(expectedExceptions = { EJBException.class })
     public void createNewCommentWithoutAuthor() {
         Comment comment = new CommentImpl();
         comment.setMessage(MESSAGE);
@@ -61,7 +63,7 @@ public class CommentEJBTest extends CommonEJBTest {
         commentEJB.save(comment);
     }
 
-    @Test(expectedExceptions = { PropertyValueException.class })
+    @Test(expectedExceptions = { EJBException.class })
     public void createNewCommentWithoutBug() {
         Comment comment = new CommentImpl();
         comment.setMessage(MESSAGE);
@@ -69,7 +71,7 @@ public class CommentEJBTest extends CommonEJBTest {
         commentEJB.save(comment);
     }
 
-    @Test(expectedExceptions = { PropertyValueException.class })
+    @Test(expectedExceptions = { EJBException.class })
     public void createNewCommentWithoutMessage() {
         Comment comment = new CommentImpl();
         comment.setBug(bug);
