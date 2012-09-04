@@ -3,46 +3,12 @@ package org.test.bugtracker.ejb;
 import static org.testng.Assert.*;
 
 import javax.ejb.EJBException;
-import javax.ejb.embeddable.EJBContainer;
-import javax.naming.Context;
-import javax.naming.NamingException;
 
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.test.bugtracker.impl.model.UserImpl;
 import org.test.bugtracker.model.User;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-@ContextConfiguration(locations = { "classpath:spring/context.xml" })
-public class UserEJBTest extends AbstractTestNGSpringContextTests {
-    private static final String LOGIN = "login";
-    private static final String PASS = "pass";
-
-    private static EJBContainer ejbContainer;
-    private static Context ctx;
-
-    private UserEJB userEJB;
-    
-    @BeforeClass
-    public static void setUp() {
-        ejbContainer = EJBContainer.createEJBContainer();
-        ctx = ejbContainer.getContext();
-    }
-
-    @AfterClass
-    public static void tearDown() {
-        ejbContainer.close();
-    }
-
-    @BeforeMethod
-    public void init() throws NamingException {
-        userEJB = (UserEJB) ctx.lookup("java:global/classes/UserEJB!org.test.bugtracker.ejb.UserEJB");
-        assertNotNull(userEJB);
-    }
-    
+public class UserEJBTest extends CommonEJBTest {
     @Test(priority = 0)
     public void createNewUser() {
         User user = new UserImpl();
