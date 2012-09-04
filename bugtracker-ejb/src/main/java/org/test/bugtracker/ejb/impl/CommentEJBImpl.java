@@ -1,13 +1,20 @@
 package org.test.bugtracker.ejb.impl;
 
+import javax.ejb.Local;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 import org.test.bugtracker.bo.CommentBO;
 import org.test.bugtracker.ejb.CommentEJB;
 import org.test.bugtracker.model.Comment;
 
-@Stateless
+@Stateless(name="CommentEJB")
+@Local(value={CommentEJB.class})
+@Remote(value={CommentEJB.class})
+@Interceptors(SpringBeanAutowiringInterceptor.class)
 public class CommentEJBImpl implements CommentEJB {
     private static final long serialVersionUID = -1391012741452615939L;
     @Autowired
