@@ -2,12 +2,11 @@ package org.test.bugtracker.ejb;
 
 import static org.testng.Assert.*;
 
+import javax.ejb.EJBException;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import org.hibernate.PropertyValueException;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.test.bugtracker.impl.model.UserImpl;
@@ -41,7 +40,6 @@ public class UserEJBTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void init() throws NamingException {
         userEJB = (UserEJB) ctx.lookup("java:global/classes/UserEJB!org.test.bugtracker.ejb.UserEJB");
-//        userEJB = new UserEJBImpl();
         assertNotNull(userEJB);
     }
     
@@ -67,7 +65,7 @@ public class UserEJBTest extends AbstractTestNGSpringContextTests {
         assertEquals(PASS, user.getPass());
     }
 
-    @Test(priority = 1, dependsOnMethods = "createNewUser", expectedExceptions = { ConstraintViolationException.class })
+    @Test(priority = 1, dependsOnMethods = "createNewUser", expectedExceptions = { EJBException.class })
     public void createUserWithSomeId() {
         User user = new UserImpl();
         user.setId(1L);
@@ -76,21 +74,21 @@ public class UserEJBTest extends AbstractTestNGSpringContextTests {
         userEJB.save(user);
     }
 
-    @Test(priority = 1, dependsOnMethods = "createNewUser", expectedExceptions = { PropertyValueException.class })
+    @Test(priority = 1, dependsOnMethods = "createNewUser", expectedExceptions = { EJBException.class })
     public void createUserWithoutLogin() {
         User user = new UserImpl();
         user.setPass(PASS);
         userEJB.save(user);
     }
 
-    @Test(priority = 1, dependsOnMethods = "createNewUser", expectedExceptions = { PropertyValueException.class })
+    @Test(priority = 1, dependsOnMethods = "createNewUser", expectedExceptions = { EJBException.class })
     public void createUserWithoutPass() {
         User user = new UserImpl();
         user.setLogin(LOGIN);
         userEJB.save(user);
     }
 
-    @Test(priority = 1, dependsOnMethods = "createNewUser", expectedExceptions = { ConstraintViolationException.class })
+    @Test(priority = 1, dependsOnMethods = "createNewUser", expectedExceptions = { EJBException.class })
     public void createUserWithSomeLogin() {
         User user = new UserImpl();
         user.setLogin(LOGIN);

@@ -1,15 +1,20 @@
 package org.test.bugtracker.ejb.impl;
 
+import javax.ejb.Local;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 import org.test.bugtracker.bo.UserBO;
 import org.test.bugtracker.ejb.UserEJB;
 import org.test.bugtracker.model.User;
 
-@Stateless
-@Repository
+@Stateless(name="UserEJB")
+@Local(value={UserEJB.class})
+@Remote(value={UserEJB.class})
+@Interceptors(SpringBeanAutowiringInterceptor.class)
 public class UserEJBImpl implements UserEJB {
     private static final long serialVersionUID = -7673799065009967650L;
     @Autowired
