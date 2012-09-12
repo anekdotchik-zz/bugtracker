@@ -12,3 +12,6 @@ application-starter/console.log
 bugtracker-ejb/target
 bugtracker-ejb/test-output
 bugtracker-ejb/console.log
+bugtracker-ear/target
+bugtracker-ear/test-output
+bugtracker-ear/console.log

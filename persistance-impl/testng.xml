@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="none">
+<suite name="Suite" parallel="false">
     <test name="Test">
         <classes>
             <class name="org.test.bugtracker.impl.bo.UserImplTest" />
             <class name="org.test.bugtracker.impl.bo.BugImplTest" />
+            <class name="org.test.bugtracker.impl.bo.CommentImplTest" />
         </classes>
     </test>
 </suite>

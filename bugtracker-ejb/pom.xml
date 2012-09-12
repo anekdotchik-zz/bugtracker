@@ -11,10 +11,6 @@
     <artifactId>bugtracker-ejb</artifactId>
     <name>bugtracker-ejb</name>
     <packaging>ejb</packaging>
-    <url>http://maven.apache.org</url>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>javax.ejb</groupId>
