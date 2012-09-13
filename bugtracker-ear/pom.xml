@@ -32,4 +32,12 @@
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.test.bugtracker</groupId>
+            <artifactId>bugtracker-ejb</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>ejb</type>
+        </dependency>
+    </dependencies>
 </project>
