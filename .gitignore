@@ -15,3 +15,6 @@ bugtracker-ejb/console.log
 bugtracker-ear/target
 bugtracker-ear/test-output
 bugtracker-ear/console.log
+bugtracker-web/target
+bugtracker-web/test-output
+bugtracker-web/console.log
