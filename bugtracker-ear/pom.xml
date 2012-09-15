@@ -28,6 +28,7 @@
                 <configuration>
                     <version>6</version>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <skinnyWars>true</skinnyWars>
                 </configuration>
             </plugin>
         </plugins>
@@ -38,6 +39,12 @@
             <artifactId>bugtracker-ejb</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>org.test.bugtracker</groupId>
+            <artifactId>bugtracker-web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
         </dependency>
     </dependencies>
 </project>
