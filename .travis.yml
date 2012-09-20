@@ -1,10 +1,11 @@
 language: java
-script: mvn -q clean install
+script: mvn clean install
 # whitelist
 branches:
   only:
     - master
-    - web
+jdk:
+  - oraclejdk6
 
 notifications:
   email:
